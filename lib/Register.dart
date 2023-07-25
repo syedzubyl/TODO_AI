@@ -1,5 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:todo/Home.dart';
 
 
 class Register extends StatelessWidget {
@@ -24,8 +25,8 @@ class Register extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 60,),
-             Padding(padding: const EdgeInsets.all(20),
-               child: Column(
+            Padding(padding: const EdgeInsets.all(20),
+              child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 FadeInUp( duration:const Duration(milliseconds: 1500),
@@ -55,7 +56,7 @@ class Register extends StatelessWidget {
                   borderRadius: BorderRadius.only(topLeft:Radius.circular(60),topRight: Radius.circular(60))
                 ),
                 child: SingleChildScrollView(
-                  padding: EdgeInsets.all(30),
+                  padding: EdgeInsets.all(25),
                   child: Column(
                     children: [
                       SizedBox(height: 50,),
@@ -83,14 +84,65 @@ class Register extends StatelessWidget {
                                 child: const  TextField(
                                   decoration: InputDecoration(
                                     hintText: "Enter Name",
-                                    hintStyle: TextStyle(fontSize: 18)
+                                    hintStyle: TextStyle(fontSize: 18),
+                                    border: InputBorder.none,
                                   ),
                                 ),
                               ),
                             ),
+                            Container(
+                              padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  border: Border(bottom: BorderSide(color: Colors.grey))
+                                ),
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  hintText: "Enter The Email",
+                                  hintStyle: TextStyle(fontSize: 18),
+                                  border: InputBorder.none
+
+                                ),
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                  border: Border(bottom: BorderSide(color: Colors.grey))
+                              ),
+                              child: TextField(
+                                decoration: InputDecoration(
+                                    hintText: "Enter The Password",
+                                    hintStyle: TextStyle(fontSize: 18),
+                                    border: InputBorder.none
+
+                                ),
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                  border: Border(bottom: BorderSide(color: Colors.grey))
+                              ),
+                              child: TextField(
+                                decoration: InputDecoration(
+                                    hintText: "Enter The Confirm Password",
+                                    hintStyle: TextStyle(fontSize: 18),
+                                    border: InputBorder.none
+
+                                ),
+                              ),
+                            )
                           ],
                         ),
                       ),
+                      SizedBox(height: 40,),
+                      ElevatedButton(onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+                      },
+                          style: ElevatedButton.styleFrom(
+
+                          ),
+                          child: Text("Register"))
                     ],
                   ),
                 ),

@@ -53,7 +53,10 @@ class Login extends StatelessWidget {
             Expanded(child: Container(
               decoration: const BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(60),topRight: Radius.circular(60),),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(60),
+                  topRight: Radius.circular(60),
+                ),
               ),
               child: SingleChildScrollView(
                 child: Padding(
@@ -83,7 +86,8 @@ class Login extends StatelessWidget {
                                 ),
                                 child: TextField(
                                   decoration: InputDecoration(
-                                    hintStyle: TextStyle(color: Colors.grey.shade800),
+                                    hintStyle: TextStyle(
+                                        color: Colors.grey.shade800),
                                     hintText: "enter name",
                                     border: InputBorder.none,
                                   )
@@ -92,12 +96,15 @@ class Login extends StatelessWidget {
                               Container(
                                 padding: EdgeInsets.all(10),
                                 decoration: BoxDecoration(
-                                  border: Border(bottom: BorderSide(color: Colors.grey.shade400))
+                                  border: Border(
+                                      bottom: BorderSide(
+                                          color: Colors.grey.shade400))
                                 ),
                                 child: TextField(
                                   decoration: InputDecoration(
                                     hintText: "Password ",
-                                    hintStyle: TextStyle(color: Colors.grey.shade900),
+                                    hintStyle: TextStyle(
+                                        color: Colors.grey.shade900),
                                     border:InputBorder.none,
                                   ),
                                 ),
@@ -107,29 +114,44 @@ class Login extends StatelessWidget {
                         ),
 
                       const SizedBox(height: 30,),
-                      Text("Forgot Password",style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,color: Colors.blue.shade400),),
+                      Text("Forgot Password",
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue.shade400),
+                      ),
                       const SizedBox(height: 30,),
                       ElevatedButton(onPressed: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => const Register()),
+                        Navigator.push(
+                          context, MaterialPageRoute(
+                            builder: (context) => const Register()),
                         );
                       }, style : ElevatedButton.styleFrom(
                         minimumSize: const Size(250, 50),
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 10),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(60),
 
                         ),
 
-                      ),child: const Text("Login",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),)),
+                      ),child: const Text("Login",
+                        style: TextStyle(
+                          fontSize: 25,
+                            fontWeight: FontWeight.bold),
+                      )
+                      ),
 
                       const SizedBox(height: 30,),
-                      Text("Conitnue With others Social Acc",
+                      Text("I Don't have An Account",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
                           color: Colors.grey.shade400)
                         ,),
-                      const Text("New Acc"),
+                      TextButton(onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => Register() ));
+                      }, child: Text("New Acc")),
                       const SizedBox(height: 30,),
                       Row(
                         children: [
@@ -155,7 +177,7 @@ class Login extends StatelessWidget {
                               color: Colors.blue,
                             ),
                             child: const Center(
-                              child: Text(" "),
+                              child: Text(" rgewgwe"),
                             ),
                           ) ,
                           ),

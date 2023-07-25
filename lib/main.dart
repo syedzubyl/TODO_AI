@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:todo/Login.dart';
 import 'package:todo/Register.dart';
+import 'package:todo/Splash.dart';
 
 void main(){
   SystemChrome.setSystemUIOverlayStyle(
@@ -18,7 +19,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Login(),
+      home: Splash(
+
+      ),
     );
   }
 }
