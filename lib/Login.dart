@@ -1,5 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:todo/Home.dart';
 import 'Register.dart';
 
 class Login extends StatelessWidget {
@@ -25,7 +26,7 @@ class Login extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             const SizedBox(height: 60,),
-            Padding(padding: EdgeInsets.all(20),
+            Padding(padding: const EdgeInsets.all(20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -37,7 +38,7 @@ class Login extends StatelessWidget {
                         fontSize: 40,
                         fontWeight: FontWeight.bold),),
                 ),
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
                 FadeInUp(duration: const Duration(milliseconds: 1200),
                   child: const Text("Welcome back",
                     style: TextStyle(
@@ -88,13 +89,13 @@ class Login extends StatelessWidget {
                                   decoration: InputDecoration(
                                     hintStyle: TextStyle(
                                         color: Colors.grey.shade800),
-                                    hintText: "enter name",
+                                    hintText: "Enter The Gmail",
                                     border: InputBorder.none,
                                   )
                                 ),
                               ),
                               Container(
-                                padding: EdgeInsets.all(10),
+                                padding: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(
                                   border: Border(
                                       bottom: BorderSide(
@@ -102,7 +103,7 @@ class Login extends StatelessWidget {
                                 ),
                                 child: TextField(
                                   decoration: InputDecoration(
-                                    hintText: "Password ",
+                                    hintText: " Password ",
                                     hintStyle: TextStyle(
                                         color: Colors.grey.shade900),
                                     border:InputBorder.none,
@@ -114,11 +115,16 @@ class Login extends StatelessWidget {
                         ),
 
                       const SizedBox(height: 30,),
-                      Text("Forgot Password",
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blue.shade400),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text("Forgot Password !",
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blue.shade400),
+                          ),
+                        ],
                       ),
                       const SizedBox(height: 30,),
                       ElevatedButton(onPressed: (){
@@ -135,7 +141,8 @@ class Login extends StatelessWidget {
 
                         ),
 
-                      ),child: const Text("Login",
+                      ),
+                          child: const Text("Login",
                         style: TextStyle(
                           fontSize: 25,
                             fontWeight: FontWeight.bold),
@@ -143,60 +150,29 @@ class Login extends StatelessWidget {
                       ),
 
                       const SizedBox(height: 30,),
-                      Text("I Don't have An Account",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          color: Colors.grey.shade400)
-                        ,),
-                      TextButton(onPressed: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => Register() ));
-                      }, child: Text("New Acc")),
-                      const SizedBox(height: 30,),
                       Row(
+                       mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Expanded(child:Container(
-                            height: 50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.blue,
-                            ),
-                            child: const Center(
-                              child: Text("Google"),
-                            ),
-                          ) ,),
-                          const SizedBox(width: 160,),
-                          Expanded(child:Container(
-                            height: 50,
-                            width: 10,
-                            decoration: BoxDecoration(
-                              image: const DecorationImage(
-                                image: AssetImage('asstes/googlelogo.jpg'),
-                              ),
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.blue,
-                            ),
-                            child: const Center(
-                              child: Text(" rgewgwe"),
-                            ),
-                          ) ,
-                          ),
-
+                          const Text("I Don't have a Account"),
+                          TextButton(onPressed: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => Register() ));
+                          }, child: const Text("create New Acc ?")),
                         ],
-                      )
-                    ],
+                      ),
 
+                      const SizedBox(height: 30,),
+                      ElevatedButton(onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+                      }, child: const Text("Google"))
+                    ],
                   ),
                 ),
               ),
-
             ),
             ),
           ],
-
         ),
       ),
-
     );
   }
 }
