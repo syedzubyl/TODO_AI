@@ -141,6 +141,7 @@ class Login extends StatelessWidget {
 
                         ),
 
+
                       ),
                           child: const Text("Login",
                         style: TextStyle(
@@ -162,8 +163,30 @@ class Login extends StatelessWidget {
 
                       const SizedBox(height: 30,),
                       ElevatedButton(onPressed: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
-                      }, child: const Text("Google"))
+                        Navigator.push(context,
+                            MaterialPageRoute(
+                                builder: (context) => Home())
+                        );
+                      },
+                          style: ElevatedButton.styleFrom(
+                            minimumSize: const Size(250, 50),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20,vertical: 10,),
+                            shadowColor: Colors.grey.shade900,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(60)
+                            ),
+
+                            backgroundColor: Colors.black54
+                          ),
+
+                          child: const Text(
+                            "Goolge",style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold
+                          ),
+                          ),
+                      ),
                     ],
                   ),
                 ),

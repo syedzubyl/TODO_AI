@@ -1,11 +1,40 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:todo/Home.dart';
+import 'package:todo/Login.dart';
 
 
-class Register extends StatelessWidget {
+class Register extends StatefulWidget {
   const Register({super.key});
 
+  @override
+  State<Register> createState() => _RegisterState();
+}
+
+class _RegisterState extends State<Register> {
+ late String _name;
+ late String _gmail;
+ late String _password;
+ late String _com_pass;
+
+ bool _isLoading = false;
+
+ void  showToast (String Message){
+   Fluttertoast.showToast(msg: Message,
+   toastLength: Toast.LENGTH_SHORT,
+     gravity: ToastGravity.BOTTOM,
+     backgroundColor: Colors.black54,
+     textColor: Colors.white,
+   );}
+
+ void   toggleLoading (){
+   setState(() {
+     _isLoading = !_isLoading;
+   });
+ }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -29,7 +58,7 @@ class Register extends StatelessWidget {
               child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                FadeInUp( duration:const Duration(milliseconds: 1500),
+                FadeInUp( duration:const Duration(milliseconds: 1000),
                   child: const Text("Register",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -38,7 +67,7 @@ class Register extends StatelessWidget {
                   ),),
                 ),
                 const SizedBox(height: 3,),
-                FadeInUp( duration: const Duration(milliseconds: 2000),
+                FadeInUp( duration: const Duration(milliseconds: 1200),
                   child: const Text("Create New Account :-)" ,
                   style: TextStyle(
                     fontSize: 20,
@@ -80,69 +109,114 @@ class Register extends StatelessWidget {
                               decoration: const BoxDecoration(
                                 border: Border(bottom: BorderSide(color: Colors.grey)),
                               ),
-                              child: FadeInUp( duration: const Duration(milliseconds: 2000),
-                                child: const  TextField(
-                                  decoration: InputDecoration(
+                              child:   TextField(
+                                  decoration: const InputDecoration(
                                     hintText: "Enter Name",
                                     hintStyle: TextStyle(fontSize: 18),
                                     border: InputBorder.none,
                                   ),
+                                  onChanged: (value){
+                                    setState(() {
+                                      _name =value;
+                                    });
+                                  },
                                 ),
-                              ),
+
                             ),
                             Container(
-                              padding: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
+                              padding: const EdgeInsets.all(10),
+                                decoration: const BoxDecoration(
                                   border: Border(bottom: BorderSide(color: Colors.grey))
                                 ),
-                              child: TextField(
-                                decoration: InputDecoration(
+                              child:TextField(
+                                decoration:  const  InputDecoration(
                                   hintText: "Enter The Email",
                                   hintStyle: TextStyle(fontSize: 18),
                                   border: InputBorder.none
 
                                 ),
+                                onChanged: (value){
+                                  setState(() {
+                                    _gmail =value;
+                                  });
+                                },
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
+                              padding: const EdgeInsets.all(10),
+                              decoration: const BoxDecoration(
                                   border: Border(bottom: BorderSide(color: Colors.grey))
                               ),
-                              child: TextField(
-                                decoration: InputDecoration(
+                              child:  TextField(
+                                decoration:const InputDecoration(
                                     hintText: "Enter The Password",
                                     hintStyle: TextStyle(fontSize: 18),
                                     border: InputBorder.none
-
                                 ),
+                                onChanged: (value){
+                                  setState(() {
+                                    _password = value;
+                                  });
+                                },
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
+                              padding: const EdgeInsets.all(10),
+                              decoration: const BoxDecoration(
                                   border: Border(bottom: BorderSide(color: Colors.grey))
                               ),
                               child: TextField(
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                     hintText: "Enter The Confirm Password",
                                     hintStyle: TextStyle(fontSize: 18),
                                     border: InputBorder.none
-
                                 ),
+                                onChanged: (value){
+                                  setState(() {
+                                    _com_pass =value;
+                                  });
+                                },
                               ),
                             )
                           ],
                         ),
                       ),
                       SizedBox(height: 40,),
-                      ElevatedButton(onPressed: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
-                      },
-                          style: ElevatedButton.styleFrom(
+                      _isLoading
+                      ? CircularProgressIndicator()
+                          :ElevatedButton(onPressed: (){
+                         debugPrint('Register');
+                         debugPrint(
+                           "Gmail: $_gmail, Name: $_name ,"
+                               "Password: $_password, Conform_Password: $_com_pass");
+                         if(_password != _com_pass){
+                           showToast("The Password Do Not Match:");
+                           return;
+                         }
+                         toggleLoading();
+                         FirebaseAuth.instance.createUserWithEmailAndPassword(
+                             email: _gmail, password: _password).
+                        then((signedInUser){
+                          debugPrint("Authenticated");
 
-                          ),
-                          child: Text("Register"))
+                         });
+                        },
+                            style: ElevatedButton.styleFrom(
+
+                            ),
+                            child: Text("Register")),
+
+                      const SizedBox(height: 30,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text("I have already Account"),
+                          TextButton(onPressed: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => const Login() ));
+                          }, child: const Text("Logged in !")),
+                        ],
+                      ),
+
                     ],
                   ),
                 ),
