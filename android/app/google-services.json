@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "983670052052",
+    "firebase_url": "https://todo-bf342-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "todo-bf342",
+    "storage_bucket": "todo-bf342.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:983670052052:android:b6958aa4e1a89a17df1741",
+        "android_client_info": {
+          "package_name": "cam.syed.todo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "983670052052-co5pnt3pibbl573h62knkboldbs5ff6e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1aA4iCQssJDKDcx9Odj81zaJXKJqKK4o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "983670052052-co5pnt3pibbl573h62knkboldbs5ff6e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
