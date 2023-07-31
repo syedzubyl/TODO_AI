@@ -1,10 +1,23 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:todo/Home.dart';
 import 'Register.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   const Login({super.key});
+
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+
+  late String _email;
+  late  String _password ;
+  GoogleSignIn googleSignIn = GoogleSignIn();
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +104,14 @@ class Login extends StatelessWidget {
                                         color: Colors.grey.shade800),
                                     hintText: "Enter The Gmail",
                                     border: InputBorder.none,
-                                  )
+
+                                  ),
+                                  onChanged: (value){
+                                    setState((){
+                                      _email =value;
+                                    });
+                                  },
+
                                 ),
                               ),
                               Container(
@@ -107,7 +127,13 @@ class Login extends StatelessWidget {
                                     hintStyle: TextStyle(
                                         color: Colors.grey.shade900),
                                     border:InputBorder.none,
+
                                   ),
+                                  onChanged: (value){
+                                    setState(() {
+                                      _password =value;
+                                    });
+                                  },
                                 ),
                               )
                             ],
@@ -128,11 +154,19 @@ class Login extends StatelessWidget {
                       ),
                       const SizedBox(height: 30,),
                       ElevatedButton(onPressed: (){
-                        Navigator.push(
-                          context, MaterialPageRoute(
-                            builder: (context) => const Register()),
-                        );
-                      }, style : ElevatedButton.styleFrom(
+                        debugPrint("Login !");
+                        if(_email.trim().isEmpty || _password.trim().isEmpty){
+                          debugPrint("Email or Password is empty.");
+                          return;
+                        }
+                        FirebaseAuth.instance.signInWithEmailAndPassword(
+                            email: _email, password: _password).then((user){
+                           
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => const Home()));
+                        }).catchError((onError){
+                          debugPrint(onError);
+                        });
+                        }, style : ElevatedButton.styleFrom(
                         minimumSize: const Size(250, 50),
                         padding: const EdgeInsets.symmetric(
                             horizontal: 20, vertical: 10),
@@ -198,4 +232,7 @@ class Login extends StatelessWidget {
       ),
     );
   }
+}
+
+class GoogleSignIn {
 }

@@ -2,9 +2,8 @@ import 'package:animate_do/animate_do.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:todo/Home.dart';
 import 'package:todo/Login.dart';
+import 'package:todo/UserHelper.dart';
 
 
 class Register extends StatefulWidget {
@@ -181,9 +180,9 @@ class _RegisterState extends State<Register> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 40,),
+                      const SizedBox(height: 40,),
                       _isLoading
-                      ? CircularProgressIndicator()
+                      ? const CircularProgressIndicator()
                           :ElevatedButton(onPressed: (){
                          debugPrint('Register');
                          debugPrint(
@@ -198,7 +197,23 @@ class _RegisterState extends State<Register> {
                              email: _gmail, password: _password).
                         then((signedInUser){
                           debugPrint("Authenticated");
+                          showToast("Registration successful!");
+                          //UserHelper().storeNewUser(signedInUser,_name, context);
+                          Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => const Login()));
+                          debugPrint("success");
+                         }).catchError((error){
+                           debugPrint("Error : $error");
 
+                           if(error is FirebaseAuthException && error.code
+                           == 'email-already exits'){
+                             showToast("Email is already in use. please choose another gmail");
+                           }
+                           else{
+                             showToast("Signup failed. Please try again later.");
+                           }
+
+                           toggleLoading();
                          });
                         },
                             style: ElevatedButton.styleFrom(
@@ -216,7 +231,6 @@ class _RegisterState extends State<Register> {
                           }, child: const Text("Logged in !")),
                         ],
                       ),
-
                     ],
                   ),
                 ),

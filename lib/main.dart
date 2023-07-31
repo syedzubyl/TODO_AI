@@ -4,11 +4,11 @@ import 'package:todo/Login.dart';
 import 'package:todo/Register.dart';
 import 'package:todo/Splash.dart';
 
-void main(){
-  SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(
-      systemNavigationBarColor: Colors.transparent, // Set your desired color
-      systemNavigationBarDividerColor: Colors.transparent,),); // Set your desired color
+import 'package:firebase_core/firebase_core.dart'; // Import Firebase Core
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(); // Initialize Firebase
   runApp(const MyApp());
 }
 

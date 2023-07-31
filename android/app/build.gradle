@@ -28,6 +28,7 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
+
 android {
     namespace "cam.syed.todo"
     compileSdkVersion flutter.compileSdkVersion
@@ -65,11 +66,20 @@ android {
         }
     }
 }
-
+android {
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 30
+        multiDexEnabled true // Add this line
+        // ...
+    }
+    // ...
+}
 flutter {
     source '../..'
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.android.support:multidex:1.0.3'
 }
