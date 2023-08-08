@@ -42,16 +42,16 @@ class _SplashState extends State<Splash> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center, // Center the "data" text vertically
                   children: [
-                    FadeInUp(duration: Duration(milliseconds: 1200),
-                      child: Text("TODO" , style: TextStyle(
+                    FadeInUp(duration: const Duration(milliseconds: 1200),
+                      child: const Text("TODO" , style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 40,
                         color: Colors.white
 
                       ),),
                     ),
-                    FadeInUp(duration: Duration(milliseconds: 1500),
-                      child: Text("Makes you lits notes" , style: TextStyle(
+                    FadeInUp(duration: const Duration(milliseconds: 1500),
+                      child: const Text("Makes you lits notes" , style: TextStyle(
                           fontWeight: FontWeight.normal,
                           fontSize: 20,
                           color: Colors.white

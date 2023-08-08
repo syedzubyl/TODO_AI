@@ -1,8 +1,13 @@
+
+
+
 import 'package:animate_do/animate_do.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:todo/Home.dart';
+import 'Phone.dart';
 import 'Register.dart';
+import "package:google_sign_in/google_sign_in.dart";
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -15,10 +20,29 @@ class _LoginState extends State<Login> {
 
   late String _email;
   late  String _password ;
-  GoogleSignIn googleSignIn = GoogleSignIn();
-
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
+  Future<void> _handleSignIn(BuildContext context) async{
+    try{
+      final GoogleSignInAccount? googleSignInAccount =await _googleSignIn.signIn();
+      if(googleSignInAccount != null){
+        final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
+        final AuthCredential credential =GoogleAuthProvider.credential(
+          accessToken: googleSignInAuthentication.accessToken,
+          idToken: googleSignInAuthentication.idToken,
+        );
+        final UserCredential userCredential =await _auth.signInWithCredential(credential);
+        final User? user = userCredential.user;
+
+        if(user != null){
+          Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => const  Home()));
+        }
+      }
+    }catch(e){
+      print("Error signing in with Google: $e");
+    }
+  }
   @override
   Widget build(BuildContext context) {
 
@@ -161,7 +185,7 @@ class _LoginState extends State<Login> {
                         }
                         FirebaseAuth.instance.signInWithEmailAndPassword(
                             email: _email, password: _password).then((user){
-                           
+
                               Navigator.push(context, MaterialPageRoute(builder: (context) => const Home()));
                         }).catchError((onError){
                           debugPrint(onError);
@@ -184,24 +208,37 @@ class _LoginState extends State<Login> {
                       )
                       ),
 
-                      const SizedBox(height: 30,),
+                      const SizedBox(height: 20,),
                       Row(
                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text("I Don't have a Account"),
                           TextButton(onPressed: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => Register() ));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => const Register() ));
                           }, child: const Text("create New Acc ?")),
                         ],
                       ),
 
-                      const SizedBox(height: 30,),
-                      ElevatedButton(onPressed: (){
-                        Navigator.push(context,
-                            MaterialPageRoute(
-                                builder: (context) => Home())
+                      Row
+                        (
+                           mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                        const Text("Conitune With ") ,
+                        TextButton(onPressed: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) =>Phone()));
+                        }, child: const Text("Phone Number!"))
+                      ]
+                      ),
+
+                      const SizedBox(height:30,),
+                      ElevatedButton(onPressed: (){_handleSignIn(context).whenComplete(() {
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                          return Home();
+                        },),
                         );
-                      },
+                      });
+
+                        },
                           style: ElevatedButton.styleFrom(
                             minimumSize: const Size(250, 50),
                             padding: const EdgeInsets.symmetric(
@@ -232,7 +269,9 @@ class _LoginState extends State<Login> {
       ),
     );
   }
+
+
+
 }
 
-class GoogleSignIn {
-}
+

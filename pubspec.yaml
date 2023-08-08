@@ -43,6 +43,8 @@ dependencies:
   fluttertoast: ^8.2.2
   firebase_auth: ^4.7.2
   cloud_firestore: ^4.8.4
+  google_sign_in: ^6.1.4
+  shared_preferences: ^2.2.0
 
 dev_dependencies:
   flutter_test:
